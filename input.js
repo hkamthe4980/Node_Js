@@ -1,7 +1,9 @@
-module.exports={
-    a : 3,
-    b: 4,
-     demo:function (){
-        return 10+20;
-    }
-}
+const data =[
+    {name:"sam",mail:"hkamthe8@gmail.com"},
+    {name:"sam",mail:"hkamthe8@gmail.com"},
+    {name:"sam",mail:"hkamthe8@gmail.com"},
+    
+
+
+]
+module.exports=data
