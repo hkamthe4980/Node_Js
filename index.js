@@ -94,3 +94,11 @@ fileSystem.appendFile(dirFileName,'We need to append this msg into a file',(err)
     }
 
 });
+
+fileSystem.rename(dirFileName,`${FilePath}/newCrud.txt`,(err)=>{
+    if(!err){
+        console.log('file name is updated');
+    }
+
+})
+fileSystem.unlinkSync(dirFileName)
