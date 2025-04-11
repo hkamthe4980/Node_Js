@@ -78,27 +78,114 @@
 //create a file in specific folder
 
 
-const fileSystem = require('fs');
-const path = require('path');
-const FilePath = path.join(__dirname,'CRUD');
-const dirFileName = (`${FilePath}/crud.txt`)
-// fileSystem.writeFileSync(dirFileName,'This is the crud file');
+// const { promises } = require('dns');
+// const fileSystem = require('fs');
+// const path = require('path');
+// const FilePath = path.join(__dirname,'CRUD');
+// const dirFileName = (`${FilePath}/crud.txt`)
+// // fileSystem.writeFileSync(dirFileName,'This is the crud file');
 
-fileSystem.readFile(dirFileName,'utf-8',(err,item)=>{
-    console.log(item);
+// fileSystem.readFile(dirFileName,'utf-8',(err,item)=>{
+//     console.log(item);
 
+// })
+// fileSystem.appendFile(dirFileName,'We need to append this msg into a file',(err)=>{
+//     if(!err){
+//         console.log('file is up to date ');
+//     }
+
+// });
+
+// fileSystem.rename(dirFileName,`${FilePath}/newCrud.txt`,(err)=>{
+//     if(!err){
+//         console.log('file name is updated');
+//     }
+
+// })
+// fileSystem.unlinkSync(dirFileName)
+
+// var a = 10;
+// var b = 20;
+
+// let watingdata = new Promise((resolve,reject)=>{
+//  setTimeout(()=>{
+//     resolve(30)
+
+//  },2000)
+
+// })
+// watingdata.then((data)=>{
+//     b =data;
+//     console.log(a+data);
+
+// })
+
+// const express = require('express')
+// const app = express()
+
+// app.get("",(req,resp)=>{
+//     resp.send(`<input type = "text" placeholder = "Enter a Name" value="${req.query.name}"/>`)
+// });
+// app.get("/page",(req,resp)=>{
+//     resp.send("response send to page")
+// })
+// app.listen(4000)
+
+
+// const express = require('express');
+
+// const path = require('path');
+
+
+
+
+// const app = express();
+// app.set('view engine', 'ejs');
+// const PublicPath = path.join(__dirname,'public');
+
+// console.log(PublicPath);
+// // app.use(express.static(PublicPath));
+
+// app.set('views', path.join(__dirname,'views'))
+// app.get('/profile',(_,resp)=>{
+   
+//     const user={
+//         name:"hemant",
+//         age:22
+
+//     }
+//     resp.render('profile',{user}) 
+//     });
+// app.get('/index',(_,resp)=>{
+//     resp.sendFile(`${PublicPath}/index.html`) 
+//     });
+// app.get('*',(_,resp)=>{
+//     resp.sendFile(`${PublicPath}/nopage.html`) 
+//     });
+
+// app.listen(5000)
+
+
+const express = require('express');
+const app = express();
+const reqFilter=require('./middleware')
+const route = express.Router();
+
+ route.use(reqFilter);
+
+
+app.get('/' ,(req,resp)=>{
+    resp.send("Home page")
 })
-fileSystem.appendFile(dirFileName,'We need to append this msg into a file',(err)=>{
-    if(!err){
-        console.log('file is up to date ');
-    }
-
-});
-
-fileSystem.rename(dirFileName,`${FilePath}/newCrud.txt`,(err)=>{
-    if(!err){
-        console.log('file name is updated');
-    }
-
+app.get('/users',reqFilter,(req,resp)=>{
+    resp.send("Users Page");
 })
-fileSystem.unlinkSync(dirFileName)
+route.get('/contact',(req,resp)=>{
+    resp.send("Contact Page")
+})
+route.get('/detail',(req,resp)=>{
+    resp.send("Detail Page");
+})
+app.use('/',route)
+
+app.listen(4000);
